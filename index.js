@@ -2,11 +2,12 @@ const express=require('express');
 const app=express();
 const PORT=3000;
 app.use(express.json());
+app.use(express.static("public"));
 
 let todolist=[];
 let idcnt=0;
 
-app.post("/addToDo",(req,res)=>{
+app.post("/addtask",(req,res)=>{
 
     const {text}=req.body;
 
@@ -16,7 +17,7 @@ app.post("/addToDo",(req,res)=>{
     const t={
         id:++idcnt,
         text,
-        completed:false
+       
     }
     todolist.push(t);
     res.json(t);
