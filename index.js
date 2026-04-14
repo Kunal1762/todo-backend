@@ -49,7 +49,7 @@ app.delete("/remove/:id",(req,res)=>{
     if(index!=-1){
         deleted=todolist.splice(index,1);
     }
-    res.json(deleted);
+    res.json(deleted[0]);
 })
 
 app.listen(PORT, ()=>{
