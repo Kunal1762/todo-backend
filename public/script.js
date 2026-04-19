@@ -1,4 +1,5 @@
 const tasklist=document.querySelector("#list");
+const completedlist=document.querySelector("#completed-list")
 function renderTask(task){
     const text=task.text;
     const ni=document.createElement("li");
@@ -20,6 +21,15 @@ function renderTask(task){
     tasklist.append(ni);
     document.querySelector("#input-text").value="";
 
+}
+function render(task){
+    const text=task.text;
+    const ni=document.createElement('li');
+    ni.classList.add("task");
+    const desc=document.createElement('span');
+    desc.textContent=text;
+    ni.appendChild(desc);
+    completedlist.append(ni);
 }
 async function addTask(){
     const text=document.querySelector("#input-text").value;
@@ -57,6 +67,7 @@ async function finishTask(){
     });
     const completedTask=await response.json();
     ni.remove();
+    
 }
 async function loadtasks(){
     const response=await fetch('/list');
@@ -65,6 +76,14 @@ async function loadtasks(){
         renderTask(task);
     });
 }
+async function loadcompleted(){
+    const response=await fetch('/getcompleted');
+    const tasks=await response.json();
+    tasks.forEach(task=>{
+        render(task);
+    });
+}
+loadcompleted();
 loadtasks();
 const addbtn=document.querySelector("#add-button");
 

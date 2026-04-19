@@ -53,6 +53,9 @@ app.put("/complete/:id",(req,res)=>{
     completed.push(complete[0]);
     res.json(complete[0]);
 })
+app.get("/getcompleted",(req,res)=>{
+    res.json(completed);
+})
 app.delete("/remove/:id",(req,res)=>{
     const id=parseInt(req.params.id);
     const index=todolist.findIndex(t=>t.id===id);

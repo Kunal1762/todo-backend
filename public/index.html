@@ -5,20 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo App</title>
     <link rel="stylesheet" href="styles.css">
-   
 </head>
 <body>
-    <div>
-        <div id="input-box">
-            <input id="input-text" type="text" placeholder="Enter your task...">
-            <button id="add-button">Add</button>
+
+    <div id="container">
+
+        <!-- LEFT: Completed Tasks -->
+        <div id="completed-section">
+            <h3>Completed Tasks</h3>
+            <ol id="completed-list"></ol>
         </div>
-        <div >
-            <ol id="list">
-                
-            </ol>
+
+        <!-- CENTER: Existing UI -->
+        <div id="main-section">
+            
+            <div id="input-box">
+                <input id="input-text" type="text" placeholder="Enter your task...">
+                <button id="add-button">Add</button>
+            </div>
+
+            <div>
+                <ol id="list"></ol>
+            </div>
+
         </div>
+        <div>
+        </div>
+
     </div>
-     <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
