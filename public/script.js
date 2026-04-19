@@ -10,6 +10,7 @@ function renderTask(task){
 
     desc.textContent=text;
     completedbtn.textContent="Completed";
+    completedbtn.addEventListener("click",finishTask);
     deletbtn.textContent="Delete";
     deletbtn.addEventListener("click",removetask);
     ni.appendChild(desc);
@@ -38,14 +39,24 @@ async function removetask(){
     const ni=this.parentElement;
 
     const id=ni.getAttribute("data-id");
-    ni.remove();
     const response=await fetch(`/remove/${id}`,{
         method:"DELETE"
     });
     const removedTask=await response.json();
     // alert(`${removedTask.text} was removed`);
+    ni.remove();
 
     
+}
+async function finishTask(){
+    const ni=this.parentElement;
+
+    const id=ni.getAttribute("data-id");
+    const response=await fetch(`/complete/${id}`,{
+        method:"PUT"
+    });
+    const completedTask=await response.json();
+    ni.remove();
 }
 async function loadtasks(){
     const response=await fetch('/list');

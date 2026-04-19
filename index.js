@@ -6,6 +6,7 @@ app.use(express.static("public"));
 
 let todolist=[];
 let idcnt=0;
+let completed=[];
 
 app.post("/addtask",(req,res)=>{
 
@@ -42,11 +43,21 @@ app.put("/update/:id",(req,res)=>{
     }
     res.json(todo);
 })
+app.put("/complete/:id",(req,res)=>{
+    const id=parseInt(req.params.id);
+    const todo=todolist.findIndex(t=>t.id===id);
+    let complete;
+    if(todo !==-1){
+        complete=todolist.splice(todo,1);
+    }
+    completed.push(complete[0]);
+    res.json(complete[0]);
+})
 app.delete("/remove/:id",(req,res)=>{
     const id=parseInt(req.params.id);
     const index=todolist.findIndex(t=>t.id===id);
     let deleted;
-    if(index!=-1){
+    if(index!==-1){
         deleted=todolist.splice(index,1);
     }
     res.json(deleted[0]);
